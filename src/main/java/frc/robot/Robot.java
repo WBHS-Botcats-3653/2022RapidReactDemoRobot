@@ -5,11 +5,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
-import frc.robot.subsystems.Drive;
+import frc.robot.Constants;
+//import frc.robot.subsystems.Drive;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,13 +23,18 @@ import frc.robot.subsystems.Drive;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-  public static OI m_oi = null;
-	private Drive m_drive = null;
+  
 
-
-  private RobotContainer m_robotContainer;
-
+	
+	VictorSP rightDriveFront = new VictorSP(Constants.RFPWMid);
+    VictorSP rightDriveBack = new VictorSP(Constants.RBPWMid);
+	MotorControllerGroup rightDrive = new MotorControllerGroup(rightDriveFront, rightDriveBack);
+    //left side
+    VictorSP leftDriveFront = new VictorSP(Constants.LFPWMid);
+    VictorSP leftDriveBack = new VictorSP(Constants.LBPWMid);
+	MotorControllerGroup leftDrive = new MotorControllerGroup(leftDriveFront, leftDriveBack);
+	
+	DifferentialDrive difDrive = new DifferentialDrive(leftDrive, rightDrive);
  /**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -32,9 +42,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
-
-		m_oi = OI.getInstance();
-		m_drive = Drive.getInstance();
+		leftDrive.setInverted(true);
+		
 	}
 
 	/**
@@ -57,7 +66,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		m_drive.reset();
+		//difDrive.reset();
 
 	}
 
@@ -80,7 +89,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_dash.refresh();
 
 		// m_autonomousCommand = m_chooser.getSelected();
 
@@ -103,14 +111,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		m_dash.telopPeriodic();
+
 
 	}
 
 	@Override
 	public void teleopInit() {
-		m_compressor.setClosedLoopControl(true);
-		m_dash.refresh();
+
+
 
 	}
 
@@ -120,8 +128,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		m_dash.telopPeriodic();
 
+		difDrive.arcadeDrive(OI.getInstance().getThrottle() , OI.getInstance().getSteering());
 	}
 
 	/**
@@ -129,7 +137,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		m_dash.testPeriodic();
+
 		// System.out.println(m_arm.getRawEncoder());
 	}
 }

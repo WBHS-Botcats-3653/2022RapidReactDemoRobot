@@ -6,15 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
-import frc.robot.Constants;
+
+
 //import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -24,17 +21,12 @@ import frc.robot.Constants;
  */
 public class Robot extends TimedRobot {
   
+	DriveTrain train = new DriveTrain();
+	
+	
 
 	
-	VictorSP rightDriveFront = new VictorSP(Constants.RFPWMid);
-    VictorSP rightDriveBack = new VictorSP(Constants.RBPWMid);
-	MotorControllerGroup rightDrive = new MotorControllerGroup(rightDriveFront, rightDriveBack);
-    //left side
-    VictorSP leftDriveFront = new VictorSP(Constants.LFPWMid);
-    VictorSP leftDriveBack = new VictorSP(Constants.LBPWMid);
-	MotorControllerGroup leftDrive = new MotorControllerGroup(leftDriveFront, leftDriveBack);
 	
-	DifferentialDrive difDrive = new DifferentialDrive(leftDrive, rightDrive);
  /**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -42,7 +34,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
-		leftDrive.setInverted(true);
+		train.getDriveTrain();
+		
 		
 	}
 
@@ -129,7 +122,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		difDrive.arcadeDrive(OI.getInstance().getThrottle() , OI.getInstance().getSteering());
+		train.ArcadeDrived();
 	}
 
 	/**
@@ -139,5 +132,7 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 
 		// System.out.println(m_arm.getRawEncoder());
+		//in here i am testing if my problem is in the drive train or the differential drive
+		train.testingMotors1(0.5, 50);
 	}
 }

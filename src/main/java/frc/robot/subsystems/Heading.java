@@ -7,20 +7,18 @@
 
 package frc.robot.subsystems;
 
-
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 
 /**
  * Wrapper class to gyro on Roborio.
  */
 public class Heading {
 	private static Heading m_singleton;
-	private ADXRS450_Gyro m_gyro;
+	private ADIS16470_IMU m_gyro;
 
 	private Heading() {
-		m_gyro = new ADXRS450_Gyro(Constants.spiGyroPort);
+		m_gyro = new ADIS16470_IMU();
 		m_gyro.calibrate();
 	}
 

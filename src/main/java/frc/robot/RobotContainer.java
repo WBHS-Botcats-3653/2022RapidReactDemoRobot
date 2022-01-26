@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.subsystems.DriveTrain;
 
@@ -19,12 +20,16 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveTrain train = new DriveTrain();
+  private final DriveTrain m_drivesubsystem = DriveTrain.getDriveTrain();
 
-  private final ArcadeDriveCommand arcadeCommands = new ArcadeDriveCommand();
+  //private final ArcadeDriveCommand arcadeCommands = new ArcadeDriveCommand();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    m_drivesubsystem.setDefaultCommand(new ArcadeDriveCommand());
+
+
+
     // Configure the button bindings
     //configureButtonBindings();
   }

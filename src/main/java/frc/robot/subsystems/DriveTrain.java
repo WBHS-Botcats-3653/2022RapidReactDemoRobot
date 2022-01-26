@@ -15,12 +15,12 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
   //this one will be used for a 
-  private DriveTrain driveTrain = null;
+  private static DriveTrain driveTrain = null;
   public OI input = OI.getInstance();
   public DifferentialDrive difDrive;
   //right side
   
-  public DriveTrain() {
+  private DriveTrain() {
     VictorSP rightDriveFront = new VictorSP(Constants.RFPWMid);
     VictorSP rightDriveBack = new VictorSP(Constants.RBPWMid);
 	  MotorControllerGroup rightDrive = new MotorControllerGroup(rightDriveFront, rightDriveBack);
@@ -33,8 +33,8 @@ public class DriveTrain extends SubsystemBase {
     leftDrive.setInverted(true);
   }
 
-  //this method initiallizes the drive train
-  public DriveTrain getDriveTrain(){
+  //this method initiallizes the drive train (it is a simpleton)
+  public static DriveTrain getDriveTrain(){
     if(driveTrain == null){
       driveTrain = new DriveTrain();
     }
@@ -49,7 +49,7 @@ public class DriveTrain extends SubsystemBase {
   }
   /**this method instantiates the arcade drive
    * 
-   * you would put this one on robotInit or on tel periodic
+   * 
    */
   public void ArcadeDrived(){
     getDriveTrain().difDrive.arcadeDrive(input.getThrottle() , input.getSteering());

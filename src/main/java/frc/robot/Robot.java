@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
+//mport frc.robot.commands.ArcadeDriveCommand;
 
 
 
@@ -21,7 +21,7 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class Robot extends TimedRobot {
   
-	DriveTrain train = new DriveTrain();
+	DriveTrain train = DriveTrain.getDriveTrain();
 	
 	
 
@@ -34,7 +34,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
-		train.getDriveTrain();
+		//train.getDriveTrain();
+
 		
 		
 	}
@@ -110,7 +111,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-
+		//Scheduler.getInstance().add(new ArcadeDriveCommand());
 
 
 	}
@@ -133,6 +134,6 @@ public class Robot extends TimedRobot {
 
 		// System.out.println(m_arm.getRawEncoder());
 		//in here i am testing if my problem is in the drive train or the differential drive
-		train.testingMotors1(0.5, 50);
+		train.testingMotors1(0.5, 0.5);
 	}
 }

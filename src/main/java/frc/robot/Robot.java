@@ -33,7 +33,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		RobotContainer m_Container = new RobotContainer();
 
+		/**it is possible that taking this out will break the robot so be carefull */
 		//train.getDriveTrain();
 
 		
@@ -123,7 +125,8 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		train.ArcadeDrived();
+		/**it is possible that taking this out will break the robot so be carefull */
+		//train.ArcadeDrived();
 	}
 
 	/**

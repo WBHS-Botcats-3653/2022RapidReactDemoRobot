@@ -14,6 +14,7 @@ import frc.robot.OI;
 import frc.robot.subsystems.DriveTrain;
 
 public class ArcadeDriveCommand extends CommandBase {
+	
 	private OI m_oi;
 	DriveTrain m_drivetrain;
 
@@ -23,7 +24,7 @@ public class ArcadeDriveCommand extends CommandBase {
 		m_oi = OI.getInstance();
 		m_drivetrain = DriveTrain.getDriveTrain();
 
-		//requires(Drive);
+		addRequirements(m_drivetrain);
 	}
 
 	// Called just before this Command runs the first time
@@ -34,6 +35,9 @@ public class ArcadeDriveCommand extends CommandBase {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	public void execute() {
+
+		
+
 		
 
 	}

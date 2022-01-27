@@ -33,7 +33,13 @@ public class DriveTrain extends SubsystemBase {
     leftDrive.setInverted(true);
   }
 
-  //this method initiallizes the drive train (it is a simpleton)
+  /**this method initiallizes the drive train (it is a simpleton)
+   * 
+   * this method is static
+   * 
+   * I did the last line because Esteban is pissing me off!!!
+   * --Ruben Hadjes
+   */
   public static DriveTrain getDriveTrain(){
     if(driveTrain == null){
       driveTrain = new DriveTrain();

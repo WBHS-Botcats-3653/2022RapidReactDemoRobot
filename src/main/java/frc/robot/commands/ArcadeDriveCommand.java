@@ -11,16 +11,17 @@ package frc.robot.commands;
 //import frc.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj2.command.CommandBase; 
 import frc.robot.OI;
+import frc.robot.subsystems.DriveTrain;
 
 public class ArcadeDriveCommand extends CommandBase {
-	private OI m_oi = null;
-	
+	private OI m_oi;
+	DriveTrain m_drivetrain;
 
 	public ArcadeDriveCommand() {
 		//super("Drive Control");
 		
 		m_oi = OI.getInstance();
-		
+		m_drivetrain = DriveTrain.getDriveTrain();
 
 		//requires(Drive);
 	}

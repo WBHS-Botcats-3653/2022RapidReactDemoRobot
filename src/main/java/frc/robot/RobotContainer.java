@@ -20,7 +20,7 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveTrain m_drivesubsystem = new DriveTrain();
+  private final DriveTrain m_drivesubsystem = DriveTrain.getDriveTrain();
 
   //private final ArcadeDriveCommand arcadeCommands = new ArcadeDriveCommand();
 
